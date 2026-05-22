@@ -43,7 +43,32 @@ export const fileTree: FileTreeNode = {
     {
       id: "8",
       name: "package-lock.json",
-      type: "file",
+      type: "folder",
+      children: [
+        {
+          id: "3",
+          name: "components",
+          type: "folder",
+          children: [
+            {
+              id: "4",
+              name: "Button.jsx",
+              type: "file",
+            },
+          ],
+        },
+        {
+          id: "5",
+          name: "components empty",
+          type: "folder",
+          children: [],
+        },
+        {
+          id: "6",
+          name: "App.jsx",
+          type: "file",
+        },
+      ],
     },
   ],
 };

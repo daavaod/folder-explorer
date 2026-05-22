@@ -10,6 +10,7 @@ type FolderProps = {
   expandedFolders: Set<string>;
   path: string;
   level?: number;
+  onSelectedFile?: (file: string) => void;
 };
 
 export default function Folder({

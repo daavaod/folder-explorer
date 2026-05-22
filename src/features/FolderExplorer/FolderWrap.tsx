@@ -28,6 +28,10 @@ export default function FolderWrap() {
     });
   };
 
+  const handleSelectedFile = (file: string) => {
+    console.log("Selected file:", file);
+  };
+
   return (
     <div className="folder-wrap">
       {multiFolderData.map((folderData, index) => {
@@ -40,6 +44,7 @@ export default function FolderWrap() {
             level={0}
             expandedFolders={expandedFolders}
             onToggleFolder={handleOnToggleFolder}
+            onSelectedFile={handleSelectedFile} // TODO: Handle file selection
             path={path}
           />
         );
