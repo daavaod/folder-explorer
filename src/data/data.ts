@@ -1,38 +1,51 @@
 import type { FileTreeNode } from "../types/fileTree";
 
 export const fileTree: FileTreeNode = {
-  id: "root",
+  id: "1",
   name: "Root",
   type: "folder",
   children: [
     {
-      id: "src",
+      id: "2",
       name: "src",
       type: "folder",
       children: [
         {
-          id: "components",
+          id: "3",
           name: "components",
           type: "folder",
           children: [
             {
-              id: "button",
+              id: "4",
               name: "Button.jsx",
               type: "file",
             },
           ],
         },
         {
-          id: "app",
+          id: "5",
+          name: "components empty",
+          type: "folder",
+          children: [],
+        },
+        {
+          id: "6",
           name: "App.jsx",
           type: "file",
         },
       ],
     },
     {
-      id: "package",
+      id: "7",
       name: "package.json",
+      type: "file",
+    },
+    {
+      id: "8",
+      name: "package-lock.json",
       type: "file",
     },
   ],
 };
+
+export const multiFileTrees = [fileTree, fileTree, fileTree];

@@ -1,5 +1,7 @@
+import CenterContent from "./components/layout/CenterContent";
+
 function App() {
-  return <>folder explorer</>;
+  return <CenterContent />;
 }
 
 export default App;
