@@ -2,9 +2,9 @@
 import FolderTitle from "./FolderTitle";
 import FolderMessage from "./FolderMessage";
 // types
-import type { FileTreeNode } from "../../types/fileTree";
+import type { FileTreeNode } from "../../../types/fileTree";
 
-type FolderProps = {
+type TreeNodeProps = {
   data: FileTreeNode;
   onToggleFolder?: (id: string) => void;
   expandedFolders: Set<string>;
@@ -13,13 +13,13 @@ type FolderProps = {
   onSelectedFile?: (file: string) => void;
 };
 
-export default function Folder({
+export default function TreeNode({
   data,
   onToggleFolder,
   expandedFolders,
   path,
   level = 0,
-}: FolderProps) {
+}: TreeNodeProps) {
   const isFolder = data.type === "folder";
   const children = isFolder ? data.children : [];
   const isEmptyFolder = isFolder && children.length === 0;
@@ -59,7 +59,7 @@ export default function Folder({
         const childPath = `${path}/${item.id}`;
 
         return (
-          <Folder
+          <TreeNode
             key={childPath}
             data={item}
             level={level + 1}

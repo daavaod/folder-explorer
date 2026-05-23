@@ -1,6 +1,6 @@
 import Header from "./Header";
 import MainContent from "./MainContent";
-import FolderWrap from "../../features/FolderExplorer/FolderWrap";
+import FolderWrap from "../../features/FolderExplorer/components/FolderWrap";
 
 export default function CenterContent() {
   return (
