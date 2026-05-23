@@ -1,6 +1,10 @@
 import Header from "./Header";
 import MainContent from "./MainContent";
-import FolderWrap from "../../features/FolderExplorer/components/FolderWrap";
+import FolderExplorerWrap from "../../features/folder-explorer/components/FolderExplorerWrap";
+import DropdownSelect from "../../features/dropdown-select/components/DropdownSelect";
+
+// data
+import { documentsData } from "../../data/documentsData";
 
 export default function CenterContent() {
   return (
@@ -13,12 +17,14 @@ export default function CenterContent() {
     >
       <Header />
       <MainContent>
-        <h2 className="text-2xl font-bold mb-4">Welcome to Folder Explorer</h2>
-        <p className="text-gray-700">
-          This is a simple application to explore your folders and files. Use
-          the navigation above to get started.
-        </p>
-        <FolderWrap />
+        <div style={{ marginBottom: "24px" }}>
+          <h2>Folder Explorer</h2>
+          <FolderExplorerWrap />
+        </div>
+        <div style={{ marginBottom: "24px" }}>
+          <h2>Dropdown Select</h2>
+          <DropdownSelect documents={documentsData} />
+        </div>
       </MainContent>
     </div>
   );

@@ -2,7 +2,7 @@
 import { multiFileTrees } from "../../../data/data.js";
 
 // types
-import type { FileTreeNode } from "../../../types/fileTree";
+import type { FileTreeNode } from "../../../types/fileTree.js";
 
 export function fetchFolderData(signal: AbortSignal): Promise<FileTreeNode[]> {
   return new Promise((resolve, reject) => {

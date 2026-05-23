@@ -4,7 +4,7 @@ import TreeNode from "./TreeNode";
 import { useExpandedFolders } from "../hooks/useExpandedFolders";
 import { useFolderData } from "../../../hooks/useFolderData";
 
-export default function FolderWrap() {
+export default function FolderExplorerWrap() {
   const { data: folderData, loading, error } = useFolderData();
   const { expandedFolders, toggleFolder } = useExpandedFolders();
 

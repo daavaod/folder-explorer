@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { fetchFolderData } from "../features/FolderExplorer/api/foldersApi";
+import { fetchFolderData } from "../features/folder-explorer/api/foldersApi";
 import type { FileTreeNode } from "../types/fileTree";
 
 export function useFolderData() {
