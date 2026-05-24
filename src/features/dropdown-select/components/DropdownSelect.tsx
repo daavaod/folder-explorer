@@ -1,4 +1,4 @@
-import { useId, useRef } from "react";
+import { useId, useRef, useEffect } from "react";
 
 // components
 import DropdownSelectInput from "./DropdownSelectInput";
@@ -8,6 +8,9 @@ import DropdownSelectList from "./DropdownSelectList";
 import { useSelectSearch } from "../hooks/useSelectSearch";
 import { useClickOutside } from "../../../hooks/useClickOutside";
 
+// event emitter
+import { appEmitter } from "../../../utils/appEmitter";
+
 // types
 import type { DocumentItem } from "../types/documentTypes";
 
@@ -16,10 +19,7 @@ export type DropdownSelectTypes = {
   id?: string;
 };
 
-export default function DropdownSelect({
-  documents,
-  id,
-}: DropdownSelectTypes) {
+export default function DropdownSelect({ documents, id }: DropdownSelectTypes) {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const generatedId = useId();
   const baseId = id ?? generatedId;
@@ -41,6 +41,18 @@ export default function DropdownSelect({
     handler: closeDropdown,
     enabled: isOpen,
   });
+
+  useEffect(() => {
+    const unsubscribe = appEmitter.on("dropdown-select", (select) => {
+      console.log("value selected", select);
+    });
+
+    return unsubscribe;
+  }, []);
+
+  const eventNames = appEmitter.eventNames();
+
+  console.log(eventNames);
 
   return (
     <div ref={dropdownRef} className="dropdown-select">

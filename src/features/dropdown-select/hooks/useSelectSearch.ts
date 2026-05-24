@@ -1,6 +1,9 @@
 import { useState } from "react";
 import type { DocumentItem } from "../types/documentTypes";
 
+// emitter
+import { appEmitter } from "../../../utils/appEmitter";
+
 export function useSelectSearch(documents: DocumentItem[]) {
   const [query, setQuery] = useState("");
   const [selected, setSelect] = useState<DocumentItem | undefined>();
@@ -23,6 +26,7 @@ export function useSelectSearch(documents: DocumentItem[]) {
   const handleSelected = (selected: DocumentItem) => {
     setSelect(selected);
     setQuery(selected.name);
+    handleClick(selected);
     closeDropdown();
   };
 
@@ -31,6 +35,11 @@ export function useSelectSearch(documents: DocumentItem[]) {
   };
   const closeDropdown = () => {
     setIsOpen(false);
+  };
+
+  // emitter test
+  const handleClick = (select: DocumentItem) => {
+    appEmitter.emit("dropdown-select", select);
   };
 
   return {
