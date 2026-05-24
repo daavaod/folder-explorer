@@ -1,8 +1,11 @@
+import { useEffect } from "react";
 // components
 import TreeNode from "./TreeNode";
 // hooks
 import { useExpandedFolders } from "../hooks/useExpandedFolders";
 import { useFolderData } from "../../../hooks/useFolderData";
+// event emitter
+import { appEmitter } from "../../../utils/appEmitter";
 
 export default function FolderExplorerWrap() {
   const { data: folderData, loading, error } = useFolderData();
@@ -11,6 +14,14 @@ export default function FolderExplorerWrap() {
   const handleSelectedFile = (file: string) => {
     console.log("Selected file:", file);
   };
+
+  useEffect(() => {
+    const unsubscribe = appEmitter.on("dropdown-select", (select) => {
+      console.log("from file explorer", select);
+    });
+
+    return unsubscribe;
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;

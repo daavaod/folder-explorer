@@ -50,10 +50,6 @@ export default function DropdownSelect({ documents, id }: DropdownSelectTypes) {
     return unsubscribe;
   }, []);
 
-  const eventNames = appEmitter.eventNames();
-
-  console.log(eventNames);
-
   return (
     <div ref={dropdownRef} className="dropdown-select">
       <DropdownSelectInput

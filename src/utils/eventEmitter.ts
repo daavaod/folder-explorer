@@ -1,7 +1,11 @@
 export type Listener = (...args: unknown[]) => void;
 
+type ErrorReporter = (error: unknown, context: { eventName: string }) => void;
+
 export class EventEmitter {
   private events = new Map<string, Set<Listener>>();
+
+  private reportError?: ErrorReporter;
 
   on(eventName: string, listener: Listener): () => void {
     // Check if this event already has listeners
@@ -27,10 +31,10 @@ export class EventEmitter {
     // If the event does not exist, there is nothing to remove
     if (!listeners) return;
 
-    console.log("events:", this.events);
+    console.log("off events:", this.events);
     console.log("off listeners:", listeners);
-    console.log("listener count:", listeners.size);
-    console.log("listeners as array:", [...listeners]);
+    console.log("off listener count:", listeners.size);
+    console.log("0ff listeners as array:", [...listeners]);
 
     // Remove this specific listener
     listeners.delete(listener);
@@ -50,7 +54,12 @@ export class EventEmitter {
 
     // Call every listener with the provided arguments
     [...listeners].forEach((listener) => {
-      listener(...args);
+      //   listener(...args);
+      try {
+        listener(...args);
+      } catch (error) {
+        this.reportError?.(error, { eventName });
+      }
     });
   }
 
@@ -82,4 +91,15 @@ export class EventEmitter {
   eventNames(): string[] {
     return [...this.events.keys()];
   }
+
+  listenerCount(eventName: string): number {
+    return this.events.get(eventName)?.size ?? 0;
+  }
 }
+
+// const appEmitter = new EventEmitter((error, context) => {
+//   console.error("Emitter listener failed:", error, context);
+
+//   // Later this could be:
+//   // Sentry.captureException(error, { extra: context });
+// });
