@@ -13,17 +13,31 @@ export function TodoList() {
   const [inputValue, setInputValue] = useState("");
   const [filter, setFilter] = useState<Filter>("all");
 
-  const visibleTodos = useMemo(() => {
+  // useMemo is probably overkill for this
+  // const visibleTodos = useMemo(() => {
+  //   if (filter === "active") {
+  //     return todos.filter((todo) => !todo.completed);
+  //   }
+
+  //   if (filter === "completed") {
+  //     return todos.filter((todo) => todo.completed);
+  //   }
+
+  //   return todos;
+  // }, [todos, filter]);
+
+  // without useMemo
+  const visibleTodos = todos.filter((todo) => {
     if (filter === "active") {
-      return todos.filter((todo) => !todo.completed);
+      return !todo.completed;
     }
 
     if (filter === "completed") {
-      return todos.filter((todo) => todo.completed);
+      return todo.completed;
     }
 
-    return todos;
-  }, [todos, filter]);
+    return true;
+  });
 
   const handleAddTodo = () => {
     const trimmedValue = inputValue.trim();
